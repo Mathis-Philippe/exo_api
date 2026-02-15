@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Match } from '../../matchs/entities/match.entity';
 
 export enum UserRole {
   COACH = 'coach',
@@ -32,4 +33,7 @@ export class User {
 
   @Column({ default: false })
   isValidated: boolean;
+
+  @ManyToMany(() => Match, (match) => match.participants)
+  matchs: Match[];
 }
